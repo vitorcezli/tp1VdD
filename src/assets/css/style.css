@@ -1,0 +1,33 @@
+.container {
+	background-color: white;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  width: 80%;
+  height: 90%;
+  border-radius: 25px;
+  border: 7px solid #A52A2A;
+  padding: 50px;
+  color: #A52A2A;
+}
+
+a {
+  color: #A52A2A;
+}
+
+a:hover {
+  color: #A52A2A;
+}
+
+a:focus {
+  color: #A52A2A;
+}
+
+table {
+    table-layout: fixed;
+    width: 100px;
+}
+
+.btn:focus {
+  outline: none;
+}

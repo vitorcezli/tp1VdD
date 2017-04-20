@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link href="vendors/css/bootstrap.min.css" rel="stylesheet">
+		<link href="assets/css/style.css" rel="stylesheet">
+	    <script src="https://code.jquery.com/jquery.js"></script>
+	    <script src="vendors/js/bootstrap.min.js"></script>
+	    <script src="assets/js/funcoesTabela.js"></script>
+
+	    <title>Tabela Dinâmica</title>
+	</head>
+
+	<body onload="inicializaTabela()" background="assets/img/background.jpg">
+		<div class="container">
+			<div>
+				<label for="usr">Search:</label>
+	  			<input type="text" class="form-control" onchange="modificaTabelaParaBusca()" id="texto-busca">
+			</div>
+			<br/>
+			<div class="table-responsive">
+				<table id="tabela-dinamica" class="table table-hover">
+				   <thead>
+				      <tr>
+				         <th onclick="ordenaPorColuna(0)"><a href="#">Date</a></th>
+				         <th onclick="ordenaPorColuna(1)"><a href="#">Home Team</a></th>
+				         <th onclick="ordenaPorColuna(2)"><a href="#">Away Team</a></th>
+				         <th onclick="ordenaPorColuna(3)"><a href="#">Home Team Goals</a></th>
+				         <th onclick="ordenaPorColuna(4)"><a href="#">Away Team Goals</a></th>
+				      </tr>
+				   </thead>
+				</table>
+			</div>
+			<div>
+				<button type="button" class="btn btn-default" onclick="avaliaBotaoPrevious()">Previous</button>
+				<button type="button" class="btn btn-default" onclick="avaliaBotaoNext()">Next</button>
+			</div>
+		</div>
+	</body>
+
+</html>
