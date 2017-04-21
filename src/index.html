@@ -3,40 +3,66 @@
 
 	<head>
 		<meta charset="UTF-8">
+	    <title>Tabela Dinâmica</title>		
+
+		<!-- CSS style -->
 		<link href="vendors/css/bootstrap.min.css" rel="stylesheet">
 		<link href="assets/css/style.css" rel="stylesheet">
-	    <script src="https://code.jquery.com/jquery.js"></script>
-	    <script src="vendors/js/bootstrap.min.js"></script>
-	    <script src="assets/js/funcoesTabela.js"></script>
-
-	    <title>Tabela Dinâmica</title>
+		<!-- Icons -->
+		<link rel="stylesheet" href="vendors/css/font-awesome.min.css">
 	</head>
 
-	<body onload="inicializaTabela()" background="assets/img/background.jpg">
-		<div class="container">
-			<div>
-				<label for="usr">Search:</label>
-	  			<input type="text" class="form-control" onchange="modificaTabelaParaBusca()" id="texto-busca">
+	<body onload="inicializaTabela()">
+
+		<div class="header">
+			<h2 class="custom-h2"> Trabalho Prático 1 de Visualização de Dados </h1>
+		</div>
+
+		<div class="container highlighted-container">
+			<!-- Search Bar -->
+			<div class="row custom-row">				
+					<div class="input-group search-bar">
+	  					<input type="text" class="form-control" onchange="modificaTabelaParaBusca()" id="texto-busca">
+						<span class="input-group-btn">
+							<button class="btn btn-danger">
+								<i class="fa fa-search" aria-hidden="false"></i>
+							</button>
+						</span>  
+					</div>
 			</div>
-			<br/>
-			<div class="table-responsive">
-				<table id="tabela-dinamica" class="table table-hover">
-				   <thead>
-				      <tr>
-				         <th onclick="ordenaPorColuna(0)"><a href="#">Date</a></th>
-				         <th onclick="ordenaPorColuna(1)"><a href="#">Home Team</a></th>
-				         <th onclick="ordenaPorColuna(2)"><a href="#">Away Team</a></th>
-				         <th onclick="ordenaPorColuna(3)"><a href="#">Home Team Goals</a></th>
-				         <th onclick="ordenaPorColuna(4)"><a href="#">Away Team Goals</a></th>
-				      </tr>
-				   </thead>
-				</table>
+
+			<!-- Dinamic Table -->
+			<div class="row custom-row">
+				<div class="table-responsive">
+					<table id="tabela-dinamica" class="table table-hover">
+					<thead>
+						<tr>
+							<th onclick="ordenaPorColuna(0)"><a href="#">Date</a></th>
+							<th onclick="ordenaPorColuna(1)"><a href="#">Home Team</a></th>
+							<th onclick="ordenaPorColuna(2)"><a href="#">Away Team</a></th>
+							<th onclick="ordenaPorColuna(3)"><a href="#">Home Team Goals</a></th>
+							<th onclick="ordenaPorColuna(4)"><a href="#">Away Team Goals</a></th>
+						</tr>
+					</thead>
+					</table>
+				</div>
 			</div>
-			<div>
-				<button type="button" class="btn btn-default" onclick="avaliaBotaoPrevious()">Previous</button>
-				<button type="button" class="btn btn-default" onclick="avaliaBotaoNext()">Next</button>
+			
+			<!-- Pagination -->
+			<div class="row custom-row">
+				<div class="pagination">
+					<button type="button" class="btn btn-default" onclick="avaliaBotaoPrevious()">Previous</button>
+					<button type="button" class="btn btn-default" onclick="avaliaBotaoNext()">Next</button>
+				</div>
+				<ul class="pagination">
+				</ul>
 			</div>
 		</div>
 	</body>
+
+	<!--   Core JS Files   -->
+	<script src="vendors/js/jquery-3.2.1.min.js"></script>
+	<script src="vendors/js/bootstrap.min.js"></script>
+	<script src="assets/js/funcoesTabela.js"></script>
 
 </html>

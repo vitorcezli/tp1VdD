@@ -1,14 +1,28 @@
-.container {
+.header {
+  margin-top:    15px;
+  margin-bottom: 15px;
+}
+
+.highlighted-container {
 	background-color: white;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  width: 80%;
-  height: 90%;
-  border-radius: 25px;
-  border: 7px solid #A52A2A;
-  padding: 50px;
-  color: #A52A2A;
+  border-radius: 10px;
+  border: 3px solid #717171;
+  color: #303030;
+}
+
+.highlighted-container > .custom-row {
+  margin-left:  10px;
+  margin-right: 10px;
+  margin-top:    3px;
+  margin-bottom: 3px;
+}
+
+.search-bar {
+  margin-top: 10px;
+}
+
+h2.custom-h2 {
+  text-align: center;
 }
 
 a {
