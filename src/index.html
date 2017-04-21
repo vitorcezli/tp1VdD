@@ -1,68 +1,91 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-	    <title>Tabela Dinâmica</title>		
+    <head>
+        <meta charset="UTF-8">
+        <title>Tabela Dinâmica</title>        
 
-		<!-- CSS style -->
-		<link href="vendors/css/bootstrap.min.css" rel="stylesheet">
-		<link href="assets/css/style.css" rel="stylesheet">
-		<!-- Icons -->
-		<link rel="stylesheet" href="vendors/css/font-awesome.min.css">
-	</head>
+        <!-- CSS style -->
+        <link href="vendors/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <!-- Icons -->
+        <link rel="stylesheet" href="vendors/css/font-awesome.min.css">
+    </head>
 
-	<body onload="inicializaTabela()">
+    <body>
 
-		<div class="header">
-			<h2 class="custom-h2"> Trabalho Prático 1 de Visualização de Dados </h1>
-		</div>
+        <div class="header">
+            <h2> Title </h2>
+			<h5> Sub-title </h5>
+        </div>
 
-		<div class="container highlighted-container">
-			<!-- Search Bar -->
-			<div class="row custom-row">				
-					<div class="input-group search-bar">
-	  					<input type="text" class="form-control" onchange="modificaTabelaParaBusca()" id="texto-busca">
-						<span class="input-group-btn">
-							<button class="btn btn-danger">
-								<i class="fa fa-search" aria-hidden="false"></i>
-							</button>
-						</span>  
+        <div class="container highlighted-container">
+            <!-- Search Bar -->
+            <div class="row custom-row">                
+                    <div class="input-group search-bar">
+                          <input type="text" class="form-control" onchange="modificaTabelaParaBusca()" id="texto-busca">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger">
+                                <i class="fa fa-search" aria-hidden="false"></i>
+                            </button>
+                        </span>  
+                    </div>
+            </div>
+
+            <!-- Dinamic Table -->
+            <div class="row custom-row">
+                <div class="table-responsive">
+                    <table id="tabela-dinamica" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th onclick="ordenaPorColuna(0)"><a href="#">Date</a></th>
+                            <th onclick="ordenaPorColuna(1)"><a href="#">Home Team</a></th>
+                            <th onclick="ordenaPorColuna(2)"><a href="#">Away Team</a></th>
+                            <th onclick="ordenaPorColuna(3)"><a href="#">Home Team Goals</a></th>
+                            <th onclick="ordenaPorColuna(4)"><a href="#">Away Team Goals</a></th>
+                        </tr>
+                    </thead>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="row custom-row">
+                <div class="pagination-area">
+                    <!--button type="button" class="btn btn-default" id="previous-btn" onclick="avaliaBotaoPrevious()">Previous</button>
+                    <button type="button" class="btn btn-default" id="next-btn" onclick="avaliaBotaoNext()">Next</button-->
+                    <ul class="pagination">
+                        <!--li id="previous-btn">
+                            <a href="#">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i> PREV
+                            </a>
+                        </li>
+                        <li id="next-btn">
+                            <a href="#">
+                                NEXT <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </li-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+		<footer class="custom-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						Desenvolvido por: Alexander Decker, Eduardo Pinto, Otávio Augusto e Vitor Cézar.
+						<br>
+						Visualização de Dados - 2017/1
 					</div>
-			</div>
-
-			<!-- Dinamic Table -->
-			<div class="row custom-row">
-				<div class="table-responsive">
-					<table id="tabela-dinamica" class="table table-hover">
-					<thead>
-						<tr>
-							<th onclick="ordenaPorColuna(0)"><a href="#">Date</a></th>
-							<th onclick="ordenaPorColuna(1)"><a href="#">Home Team</a></th>
-							<th onclick="ordenaPorColuna(2)"><a href="#">Away Team</a></th>
-							<th onclick="ordenaPorColuna(3)"><a href="#">Home Team Goals</a></th>
-							<th onclick="ordenaPorColuna(4)"><a href="#">Away Team Goals</a></th>
-						</tr>
-					</thead>
-					</table>
 				</div>
 			</div>
-			
-			<!-- Pagination -->
-			<div class="row custom-row">
-				<div class="pagination">
-					<button type="button" class="btn btn-default" onclick="avaliaBotaoPrevious()">Previous</button>
-					<button type="button" class="btn btn-default" onclick="avaliaBotaoNext()">Next</button>
-				</div>
-				<ul class="pagination">
-				</ul>
-			</div>
-		</div>
-	</body>
+    	</footer>
+    </body>
 
-	<!--   Core JS Files   -->
-	<script src="vendors/js/jquery-3.2.1.min.js"></script>
-	<script src="vendors/js/bootstrap.min.js"></script>
-	<script src="assets/js/funcoesTabela.js"></script>
+    <!--   Core JS Files   -->
+    <script src="vendors/js/jquery-3.2.1.min.js"></script>
+    <script src="vendors/js/bootstrap.min.js"></script>
+    <script src="assets/js/funcoesTabela.js"></script>
 
 </html>

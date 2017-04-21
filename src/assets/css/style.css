@@ -1,10 +1,14 @@
+html, body {
+  height: 100%;
+}
+
 .header {
   margin-top:    15px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .highlighted-container {
-	background-color: white;
+  background-color: white;
   border-radius: 10px;
   border: 3px solid #717171;
   color: #303030;
@@ -21,8 +25,37 @@
   margin-top: 10px;
 }
 
-h2.custom-h2 {
+.header > h1, .header > h2, .header > h3, .header > h4,
+.header > h5, .header > h6 {
   text-align: center;
+}
+
+div.pagination-area {
+  text-align: center;
+}
+
+div.pagination-area > ul.pagination > li > a {
+  border: none;
+  border-radius: 10%;
+  color: #C9302C;
+  width: 40px;
+  max-width: 60px;
+  text-align: center;
+}
+
+div.pagination-area > ul.pagination > li.active > a{
+  background-color: #C9302C;
+  color: white;
+}
+
+.custom-footer{
+  background-color: white;
+  padding-top:    20px;
+  padding-bottom: 10px;
+  padding-left:    5px;
+  padding-right:   5px;
+  bottom: 0;
+  left: 0;
 }
 
 a {
@@ -40,8 +73,4 @@ a:focus {
 table {
     table-layout: fixed;
     width: 100px;
-}
-
-.btn:focus {
-  outline: none;
 }
