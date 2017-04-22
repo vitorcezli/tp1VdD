@@ -1,6 +1,11 @@
 /**
- * tabela que irá armazenar os dados
+ * função que irá ler o arquivo csv e passar para um array
  */
+
+d3.csv("/data/dados-tp1.csv", function(data) {
+  console.log(data[0]);
+});
+
 var tabelaDados = [ 
     ["13/08/16","Burnley","Swansea","0","1"],
     ["13/08/16","Crystal Palace","West Brom","0","1"],
