@@ -4,22 +4,26 @@
 
 var tabelaDados=[];
 
+/**
+ * Cabecalho da tabela.
+ */
+var tableHeader;
+
 d3.csv("/home/eduardo/github/tp1VdD/src/data/dados-tp1.csv", function(data) {
     console.log(data[0]);
-    
+
+    // Extracting the header (1st line in the document).
+    header = Object.keys(data[0]);
+
+    // Extracting the data.
     data.forEach(function(element) {
-        var aux = [];
-        aux.push(element.permalink);
-        aux.push(element.company);
-        aux.push(element.numEmps);
-        aux.push(element.category);
-        aux.push(element.city);
-        aux.push(element.state);
-        aux.push(element.fundedDate);
-        aux.push(element.raisedAmt);
-        aux.push(element.raisedCurrency);
-        aux.push(element.round);
-        tabelaDados.push(aux);
+        var line = [];
+        Object.values(element).forEach(function(v) {
+            line.push(v);
+        });
+
+        tabelaDados.push(line);
+
         //console.log(aux)
     }, this);
     
