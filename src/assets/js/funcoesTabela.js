@@ -2,10 +2,13 @@
  * função que irá ler o arquivo csv e passar para um array
  */
 
-d3.csv("/data/dados-tp1.csv", function(data) {
-  console.log(data[0]);
-});
+var tabelaDados=[];
 
+d3.csv("../../data/dados-tp1.csv", function(data) {
+  tabelaDados.push(data);
+})
+
+/*
 var tabelaDados = [ 
     ["13/08/16","Burnley","Swansea","0","1"],
     ["13/08/16","Crystal Palace","West Brom","0","1"],
@@ -328,6 +331,7 @@ var tabelaDados = [
     ["15/04/17","Tottenham","Bournemouth","4","0"],
     ["15/04/17","Watford","Swansea","1","0"]
 ];
+*/
 
 /**
  * tabela que irá armazenar somente os dados que serão impressos
