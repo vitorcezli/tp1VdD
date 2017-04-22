@@ -9,7 +9,7 @@ var tabelaDados=[];
  */
 var tableHeader;
 
-d3.csv("/home/eduardo/github/tp1VdD/src/data/dados-tp1.csv", function(data) {
+d3.csv("data/dados-tp1.csv", function(data) {
     console.log(data[0]);
 
     // Extracting the header (1st line in the document).
