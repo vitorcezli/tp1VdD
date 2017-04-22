@@ -4,8 +4,25 @@
 
 var tabelaDados=[];
 
-d3.csv("../../data/dados-tp1.csv", function(data) {
-  tabelaDados.push(data);
+d3.csv("/home/eduardo/github/tp1VdD/src/data/dados-tp1.csv", function(data) {
+    console.log(data[0]);
+    
+    data.forEach(function(element) {
+        var aux = [];
+        aux.push(element.permalink);
+        aux.push(element.company);
+        aux.push(element.numEmps);
+        aux.push(element.category);
+        aux.push(element.city);
+        aux.push(element.state);
+        aux.push(element.fundedDate);
+        aux.push(element.raisedAmt);
+        aux.push(element.raisedCurrency);
+        aux.push(element.round);
+        tabelaDados.push(aux);
+        //console.log(aux)
+    }, this);
+    
 })
 
 /*
@@ -375,7 +392,7 @@ var firstPageInList;
  */
 $('document').ready( function() {
     copiaTabelas();
-    ordenaPorColuna( 0 );
+    ordenaPorColuna(1);
     reinicializaTabela();
 
     var pagination = $('ul.pagination');
@@ -437,6 +454,9 @@ function reinicializaTabela() {
 function modificaTabelaParaBusca() {
     copiaTabelas();
     reinicializaTabela();
+
+    var pagination = $('ul.pagination');
+    updatePagination(pagination);
 }
 
 /**
@@ -610,6 +630,18 @@ function createPagination(pagination) {
             currPage = pageSelected;
         }
     });
+}
+
+/**
+ * Updates the pagination based on the current numPages.
+ * @param {*} pagination Pagination element.
+ */
+function updatePagination(pagination) {
+    console.log('Updating pagination.');
+    // Destroying the old pagination.
+    pagination.empty();
+    // Creating the new one.
+    createPagination(pagination);
 }
 
 /**
