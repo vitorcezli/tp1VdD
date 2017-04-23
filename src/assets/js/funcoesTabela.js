@@ -66,12 +66,6 @@ var maxRangePag = 22;
 var firstPageInList;
 
 /**
- * guarda os estados da coluna para ordenar entre
- * crescente e decrescente
- */
-var estados = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-/**
  * Inicializando a pagina.
  */
 $('document').ready( function() {
@@ -112,7 +106,8 @@ function copiaTabelas() {
         } else {
             // analisa cada coluna da tupla
             for( coluna = 0; coluna < tabelaDados[ linha ].length; coluna++ ) {
-                if( tabelaDados[ linha ][ coluna ].toLowerCase().includes( stringTextoBusca.toLowerCase() ) ) {
+                if( tabelaDados[ linha ][ coluna ].toLowerCase()
+                    .includes( stringTextoBusca.toLowerCase() ) ) {
                     tabelaDadosImpressao.push( tabelaDados[ linha ].slice() );
                     break;
                 }
@@ -354,26 +349,34 @@ function showTableSlice(n) {
 /**
  * ordena a tabela baseada nos valores da coluna indicada
  */
-function ordenaPorColuna( coluna ) {
+var ordenaPorColuna = (function () {
     var funcaoOrdenacao;
+    /*
+     * guarda os estados da coluna para ordenar entre
+     * crescente e decrescente
+     */
+    var estados = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    if(estados[coluna] == 0 ) {
-        funcaoOrdenacao = function( a, b ) {
-            return a[ coluna ].localeCompare( b[ coluna ] );
+    return function ( coluna ) {
+        if(estados[coluna] == 0 ) {
+            funcaoOrdenacao = function( a, b ) {
+                return a[ coluna ].localeCompare( b[ coluna ] );
+            }
+            estados[coluna] = 1;
+        } 
+        else {
+            funcaoOrdenacao = function( a, b ) {
+                return b[ coluna ].localeCompare( a[ coluna ] );
+            }
+            estados[coluna] = 0;
         }
-        estados[coluna] = 1;
-    } 
-    else {
-        funcaoOrdenacao = function( a, b ) {
-            return b[ coluna ].localeCompare( a[ coluna ] );
-        }
-        estados[coluna] = 0;
+        
+        tabelaDados.sort( funcaoOrdenacao );
+        tabelaDadosImpressao.sort( funcaoOrdenacao );
+        reinicializaTabela();
     }
-    
-    tabelaDados.sort( funcaoOrdenacao );
-    tabelaDadosImpressao.sort( funcaoOrdenacao );
-    reinicializaTabela();
-}
+
+})();
 
 /**
  * adiciona as tuplas que serão exibidas na tabela. Utilizada
