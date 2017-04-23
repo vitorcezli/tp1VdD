@@ -294,13 +294,13 @@ function createPagination(pagination) {
         createPaginationButtons(pagination, numPages);
     } else {
         createPaginationButtons(pagination, maxRangePag);
-        $('li#previous-btn').css('visibility', 'hidden');
+        pagination.find('li#previous-btn').css('visibility', 'hidden');
     }
 
     // First element will be the current active.
     firstPageInList  = 1;
     var pageSelected = 1;
-    $('ul.pagination > li.pag-index').first()
+    pagination.find('li.pag-index').first()
                                    .addClass('active');
 
     // Function that updates the active page markation.
