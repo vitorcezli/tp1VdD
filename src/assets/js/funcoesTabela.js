@@ -128,7 +128,9 @@ function copiaTabelas() {
  */
 function reinicializaTabela() {
     primeiraLinhaImpressao = 0;
-    mostreProximosDadosTabela();
+
+    var pagination = $('ul.pagination');
+    resetPagination(pagination);
 }
 
 /**
@@ -317,6 +319,17 @@ function createPagination(pagination) {
 }
 
 /**
+ * Activates the first page.
+ * @param {*} pagination Pagination element
+ */
+function resetPagination(pagination) {
+    pagination.find('li.pag-index').removeClass('active')
+                                   .first()
+                                   .addClass('active');
+    showTableSlice(0);
+}
+
+/**
  * Updates the pagination based on the current numPages.
  * @param {*} pagination Pagination element.
  */
@@ -378,7 +391,7 @@ function ordenaPorColuna( coluna ) {
 /**
  * adiciona as tuplas que serão exibidas na tabela. Utilizada
  * internamente
- */
+
 function mostreProximosDadosTabela() {
     limpaTabela();
 
@@ -390,3 +403,4 @@ function mostreProximosDadosTabela() {
         adicionaLinha( tabelaDadosImpressao[ linha ] );
     }
 }
+ */
