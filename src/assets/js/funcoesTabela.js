@@ -34,7 +34,7 @@ var quantidadeLinhaImpressao = 20;
 /**
  * Pagina atual.
  */
-var currPage = 1;
+var currPage;
 
 /**
  * Numero de paginas com dados.
@@ -81,14 +81,11 @@ $('document').ready( function() {
 
     // Colocando o cabecalo na tabela recem-criada.
     var table = $('#table-header');
-    console.log(table);
     createTableHeader(table);
 
-    //var pagination = $('ul.pagination');
-    //createPagination(pagination);
-
-    ordenaPorColuna(0);
-    //reinicializaTabela();
+    // Inicializando a paginacao.
+    var pagination = $('ul.pagination');
+    createPagination(pagination);
 });
 
 /**
@@ -157,15 +154,13 @@ function copiaTabelas() {
  */
 function reinicializaTabela() {
     primeiraLinhaImpressao = 0;
-
-    var pagination = $('ul.pagination');
-    resetPagination(pagination);
+    limpaTabela();
 }
 
 /**
  * deixa na tabela que será impressa somente as tuplas com valores referentes
  * ao que foi passado no texto de busca
- */
+*/
 function modificaTabelaParaBusca() {
     copiaTabelas();
     reinicializaTabela();
@@ -262,13 +257,11 @@ function createPaginationButtons(pagList, n) {
 
     // Width of the buttons in the pagination.
     var btnWidth = 30 + Math.floor(Math.log10(numPages)) * 10;
-    console.log(btnWidth);
 
     // Adds the previous button only if it is necessary.
     if (n < numPages) {
         var li = $('<li></li>')
             .attr('id','previous-btn')
-            //.addClass('disabled')
             .appendTo(pagList);
         var a = $('<a></a>')
             .attr('href','javascript:moveBack()')
@@ -277,7 +270,6 @@ function createPaginationButtons(pagList, n) {
         var icon = $('<i></i>')
             .addClass('fa')
             .addClass('fa-chevron-left')
-            //.text(' PREV')
             .appendTo(a);
         }
 
@@ -302,7 +294,6 @@ function createPaginationButtons(pagList, n) {
         a = $('<a></a>')
             .attr('href','javascript:moveForward()')
             .css('width', btnWidth + 'px')
-            //.text('NEXT ')
             .appendTo(li);
         icon = $('<i></i>')
             .addClass('fa')
@@ -317,7 +308,6 @@ function createPaginationButtons(pagList, n) {
  */
 function createPagination(pagination) {
     numPages = Math.ceil(tabelaDadosImpressao.length/quantidadeLinhaImpressao);
-    console.log('Numero de paginas: ' + numPages);
 
     if (numPages < maxRangePag) {
         createPaginationButtons(pagination, numPages);
@@ -327,8 +317,8 @@ function createPagination(pagination) {
     }
 
     // First element will be the current active.
+    showTableSlice(0);
     firstPageInList  = 1;
-    var pageSelected = 1;
     pagination.find('li.pag-index').first()
                                    .addClass('active');
 
@@ -338,7 +328,7 @@ function createPagination(pagination) {
         $('li.pag-index').removeClass('active');
         $(this).addClass('active');
 
-        pageSelected = firstPageInList + $(this).data('id');
+        var pageSelected = firstPageInList + $(this).data('id');
         // Updates the table only if the page is not currently displayed.
         if (currPage != pageSelected) {
             showTableSlice(pageSelected - 1);
@@ -352,7 +342,6 @@ function createPagination(pagination) {
  * @param {*} pagination Pagination element
  */
 function resetPagination(pagination) {
-    console.log('Reseting Pagination.');
     if (firstPageInList == 1) {
         pagination.find('li.pag-index').removeClass('active')
                                        .first()
@@ -360,6 +349,7 @@ function resetPagination(pagination) {
     } else {
         updatePagination(pagination);
     }
+
     showTableSlice(0);
 }
 
@@ -368,7 +358,6 @@ function resetPagination(pagination) {
  * @param {*} pagination Pagination element.
  */
 function updatePagination(pagination) {
-    console.log('Updating pagination.');
     // Destroying the old pagination.
     pagination.empty();
     // Creating the new one.
@@ -377,7 +366,7 @@ function updatePagination(pagination) {
 
 /**
  * Modify the table to show just one part of it.
- * @param {*} n - number of the slice. The slice begin in 
+ * @param {*} n number of the slice. The slice begin in 
  * (quantidadeLinhaImpressao * n) and have quantidadeLinhaImpressao elements
  * or less.
  */
@@ -397,6 +386,8 @@ function showTableSlice(n) {
         }
     }
 }
+
+// ----------------------------------------------------------------------------
 
 /**
  * ordena a tabela baseada nos valores da coluna indicada
@@ -425,23 +416,9 @@ var ordenaPorColuna = (function () {
         tabelaDados.sort( funcaoOrdenacao );
         tabelaDadosImpressao.sort( funcaoOrdenacao );
         reinicializaTabela();
+
+        var pagination = $('ul.pagination');
+        resetPagination(pagination);
     }
 
 })();
-
-/**
- * adiciona as tuplas que serão exibidas na tabela. Utilizada
- * internamente
-
-function mostreProximosDadosTabela() {
-    limpaTabela();
-
-    var limiteImpressao = Math.min( 
-        primeiraLinhaImpressao + quantidadeLinhaImpressao,
-        tabelaDadosImpressao.length 
-    );
-    for( linha = primeiraLinhaImpressao; linha < limiteImpressao; linha++ ) {
-        adicionaLinha( tabelaDadosImpressao[ linha ] );
-    }
-}
- */
