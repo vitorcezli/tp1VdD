@@ -123,7 +123,9 @@ function copiaTabelas() {
  */
 function reinicializaTabela() {
     primeiraLinhaImpressao = 0;
-    mostreProximosDadosTabela();
+
+    var pagination = $('ul.pagination');
+    resetPagination(pagination);
 }
 
 /**
@@ -287,13 +289,13 @@ function createPagination(pagination) {
         createPaginationButtons(pagination, numPages);
     } else {
         createPaginationButtons(pagination, maxRangePag);
-        $('li#previous-btn').css('visibility', 'hidden');
+        pagination.find('li#previous-btn').css('visibility', 'hidden');
     }
 
     // First element will be the current active.
     firstPageInList  = 1;
     var pageSelected = 1;
-    $('ul.pagination > li.pag-index').first()
+    pagination.find('li.pag-index').first()
                                    .addClass('active');
 
     // Function that updates the active page markation.
@@ -309,6 +311,17 @@ function createPagination(pagination) {
             currPage = pageSelected;
         }
     });
+}
+
+/**
+ * Activates the first page.
+ * @param {*} pagination Pagination element
+ */
+function resetPagination(pagination) {
+    pagination.find('li.pag-index').removeClass('active')
+                                   .first()
+                                   .addClass('active');
+    showTableSlice(0);
 }
 
 /**
@@ -381,7 +394,7 @@ var ordenaPorColuna = (function () {
 /**
  * adiciona as tuplas que serão exibidas na tabela. Utilizada
  * internamente
- */
+
 function mostreProximosDadosTabela() {
     limpaTabela();
 
@@ -393,3 +406,4 @@ function mostreProximosDadosTabela() {
         adicionaLinha( tabelaDadosImpressao[ linha ] );
     }
 }
+ */
