@@ -9,7 +9,7 @@ html, body {
 
 .highlighted-container {
   background-color: white;
-  /*border-radius: 10px;*/
+  border-radius: 5px;
   border: 3px solid #717171;
   color: #303030;
 }
@@ -58,15 +58,7 @@ div.pagination-area > ul.pagination > li.active > a{
   left: 0;
 }
 
-a {
-  color: #A52A2A;
-}
-
-a:hover {
-  color: #A52A2A;
-}
-
-a:focus {
+th > a, th > a:hover, th > a:focus {
   color: #A52A2A;
 }
 
@@ -79,9 +71,9 @@ th {
 	top:0;
 	background-color:white;
 	overflow:hidden;
-	/*width:500px;*/
+  margin-top: 0;
 }
 
-#dinamic-thead>table{
+#dinamic-thead > table{
 	table-layout:fixed;
 }

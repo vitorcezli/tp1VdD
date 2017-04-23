@@ -9,24 +9,10 @@ var tabelaDados=[];
  */
 var tableHeader;
 
-d3.csv("data/dados-tp1.csv", function(data) {
-
-    // Extracting the header (1st line in the document).
-    tableHeader = Object.keys(data[0]);
-	
-    // Extracting the data.
-    data.forEach(function(element) {
-        var line = [];
-        Object.values(element).forEach(function(v) {
-            line.push(v);
-        });
-
-        tabelaDados.push(line);
-
-        //console.log(aux)
-    }, this);
-    
-})
+/**
+ * Indica se os dados estao em ordem crescente (0) ou descrescente (1).
+ */
+var estados;
 
 /**
  * tabela que irá armazenar somente os dados que serão impressos
@@ -42,7 +28,7 @@ var primeiraLinhaImpressao = 0;
 /**
  * indica a quantidade de tuplas a ser impressa por seção
  */
-var quantidadeLinhaImpressao = 15;
+var quantidadeLinhaImpressao = 20;
 
 // -------------- Variaveis para controle de paginacao ----------
 /**
@@ -58,24 +44,72 @@ var numPages;
 /**
  * Numero maximo de paginas a serem listadas na paginacao.
  */
-var maxRangePag = 22;
+var maxRangePag = 10;
 
 /**
  * Primeiro indice sendo mostrado na paginacao.
  */
 var firstPageInList;
 
+d3.csv("data/dados-tp1.csv", function(data) {
+    // Extracting the header (1st line in the document).
+    tableHeader = Object.keys(data[0]);
+    for (var i = 0; i < tableHeader.length; i++)
+        tableHeader[i] = tableHeader[i].toUpperCase();
+    
+    // Extracting the data.
+    data.forEach(function(element) {
+        var line = [];
+        Object.values(element).forEach(function(v) {
+            line.push(v);
+        });
+
+        tabelaDados.push(line);
+    }, this);
+    
+});
+
 /**
  * Inicializando a pagina.
  */
 $('document').ready( function() {
     copiaTabelas();
-    ordenaPorColuna(0);
-    reinicializaTabela();
 
-    var pagination = $('ul.pagination');
-    createPagination(pagination);
+    // Inicializando o vetor de estados apos ter se obtido os campos do 
+    // cabecalho.
+    estados = new Array(tableHeader.length).fill(0);
+
+    // Colocando o cabecalo na tabela recem-criada.
+    var table = $('#table-header');
+    console.log(table);
+    createTableHeader(table);
+
+    //var pagination = $('ul.pagination');
+    //createPagination(pagination);
+
+    ordenaPorColuna(0);
+    //reinicializaTabela();
 });
+
+/**
+ * Creates a table header. Needs the global var tableHeader.
+ */
+function createTableHeader(table) {
+    var header = $('<tr></tr>');
+    var th, a;
+
+    for (var i = 0; i < tableHeader.length; i++) {
+        th = $('<th></th>')
+             .attr('onclick','ordenaPorColuna(' + i + ')')
+             .appendTo(header);
+        a = $('<a></a>')
+             .attr('href','javascript:void(0)')
+             .text(tableHeader[i])
+             .appendTo(th);
+    }
+
+    header.appendTo(table);
+}
 
 /**
  * adiciona uma linha na tabela. Utilizada internamente.
@@ -318,9 +352,14 @@ function createPagination(pagination) {
  * @param {*} pagination Pagination element
  */
 function resetPagination(pagination) {
-    pagination.find('li.pag-index').removeClass('active')
-                                   .first()
-                                   .addClass('active');
+    console.log('Reseting Pagination.');
+    if (firstPageInList == 1) {
+        pagination.find('li.pag-index').removeClass('active')
+                                       .first()
+                                       .addClass('active');
+    } else {
+        updatePagination(pagination);
+    }
     showTableSlice(0);
 }
 
@@ -368,7 +407,6 @@ var ordenaPorColuna = (function () {
      * guarda os estados da coluna para ordenar entre
      * crescente e decrescente
      */
-    var estados = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     return function ( coluna ) {
         if(estados[coluna] == 0 ) {
