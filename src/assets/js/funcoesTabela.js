@@ -12,8 +12,8 @@ var tableHeader;
 d3.csv("data/dados-tp1.csv", function(data) {
 
     // Extracting the header (1st line in the document).
-    header = Object.keys(data[0]);
-
+    tableHeader = Object.keys(data[0]);
+	
     // Extracting the data.
     data.forEach(function(element) {
         var line = [];

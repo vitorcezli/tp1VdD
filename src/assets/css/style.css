@@ -9,7 +9,7 @@ html, body {
 
 .highlighted-container {
   background-color: white;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   border: 3px solid #717171;
   color: #303030;
 }
@@ -70,7 +70,18 @@ a:focus {
   color: #A52A2A;
 }
 
-table {
-    table-layout: fixed;
-    width: 100px;
+th {
+    white-space: nowrap;
+}
+
+#dinamic-thead{
+	position:fixed;
+	top:0;
+	background-color:white;
+	overflow:hidden;
+	/*width:500px;*/
+}
+
+#dinamic-thead>table{
+	table-layout:fixed;
 }
